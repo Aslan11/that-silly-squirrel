@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=medium-dpi" />
+
+        <!-- for Facebook -->
+        <meta property="og:title" content="That Silly Squirrel" />
+        <meta property="og:image" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:description" content="I just scored a silly high score on That Silly Squirrel" />
+
+        <!-- for Twitter -->
+        <meta name="twitter:title" content="That Stupid Squirrel" />
+        <meta name="twitter:description" content="I just scored a silly high score on That Silly Squirrel" />
+        <meta name="twitter:image" content="" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>That Silly Squirrel</title>
+    </head>
+    <body>
+        <div id="title" class="title active">That<br>Silly<br>Squirrel</div>
+        <canvas id="canvas"></canvas>
+        <div class="jump" id="jump"></div>
+        <div id="medal" class="medal titanium">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Your_Icon" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+            <path fill="#000000" d="M84.657,52.703c-2.874,0.508-6.625,0.153-10.875-0.268c-6.711-0.65-15.063-1.459-22.827,0.962  c-7.764,2.424-14.154,7.922-19.293,12.274c-3.206,2.708-6.01,5.141-8.637,6.399c4.955,11.671,19.19,32.565,41.808,25.505  C86.489,90.819,87.071,65.129,84.657,52.703z M59.336,91.674c-9.983,2.325-19.901-3.521-22.385-12.958  c-1.251-2.628-0.507-5.86,1.922-7.645c2.761-2.017,6.62-1.421,8.642,1.328c0.881,1.194,1.272,2.608,1.194,3.976  c2.112,7.389,8.694,12.447,16.25,13.081C63.263,90.463,61.37,91.202,59.336,91.674z"/>
+            <g>
+              <path fill="#000000" d="M44.531,16.817c-1.888-4.258-2.723-9.002-2.211-13.931l-8.881,3.8L23.893,1   c-0.792,7.795,1.831,15.235,6.699,20.887c2.893-1.512,6.013-2.803,9.329-3.833C41.464,17.57,43,17.157,44.531,16.817z"/>
+            </g>
+            <g>
+              <path fill="#000000" d="M46.34,20.25c-1.723,0.364-3.5,0.823-5.302,1.378c-2.754,0.868-5.324,1.885-7.702,3.048   c-16.184,7.86-23.323,22.191-18.371,38.057c2.271,7.232,4.422,6.642,5.57,6.275l0,0c0.363-0.112,0.766-0.29,1.17-0.495   c2.072-1.069,4.625-3.28,7.505-5.729c5.415-4.574,12.116-10.345,20.617-12.991c8.494-2.648,17.27-1.792,24.323-1.107   c3.859,0.375,7.275,0.696,9.597,0.34c0.38-0.055,0.739-0.134,1.064-0.232c1.144-0.361,3.277-1.026,1.017-8.252   C80.621,23.854,65.418,16.235,46.34,20.25z"/>
+            </g>
+          </svg>
+          <div class="medal-bg"></div>
+          <div class="ribbon">
+            <span id="medal-score">14</span>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+          <div id="leaders" class="leaders">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+              <path d="M94.767,25.954c-0.277-1.423-0.811-2.972-1.909-4.401c-1.064-1.423-2.729-2.532-4.359-3.038l-0.311-0.099l-0.078-0.033  l-0.267-0.055l-0.089-0.027l-0.443-0.083c-0.577-0.099-1.109-0.132-1.498-0.126c-0.832,0.005-1.609,0.093-2.275,0.236  c-1.387,0.264-2.529,0.648-3.617,1.049c-0.377,0.137-0.721,0.296-1.087,0.45l1.276-5.9c0.121-0.296,0.188-0.593,0.188-0.884  C80.298,8.599,66.771,5,50.083,5C33.406,5,19.88,8.599,19.88,13.043c0,0.291,0.066,0.588,0.189,0.884l1.287,5.983  c-0.421-0.176-0.832-0.362-1.276-0.533c-1.087-0.401-2.23-0.786-3.606-1.049c-0.677-0.143-1.454-0.231-2.286-0.236  c-0.388-0.005-0.92,0.027-1.498,0.126l-0.444,0.083l-0.088,0.027l-0.267,0.055l-0.077,0.033l-0.311,0.099  c-1.631,0.506-3.296,1.615-4.361,3.038c-1.099,1.429-1.631,2.978-1.908,4.401c-0.521,2.884-0.089,5.406,0.51,7.751  c1.332,4.659,3.806,8.659,6.902,12.076c3.163,3.434,7.113,6.153,11.684,7.582c1.42,0.45,2.918,0.741,4.46,0.846l0.721,3.341  c1.398,6.482,7.945,11.729,14.636,11.778c-0.011,4.896-0.521,9.422-2.663,13.345c-4.161,0.741-6.913,1.994-6.913,3.434v4.769  c0,2.285,6.957,4.126,15.512,4.126c8.565,0,15.512-1.841,15.512-4.126v-4.769c0-1.439-2.741-2.692-6.913-3.434  c-2.131-3.923-2.652-8.449-2.663-13.345c6.69-0.049,13.249-5.296,14.658-11.778l0.71-3.352c1.487-0.121,2.918-0.401,4.283-0.835  c4.571-1.429,8.521-4.148,11.684-7.582c3.096-3.417,5.57-7.417,6.901-12.076C94.855,31.359,95.288,28.838,94.767,25.954z   M26.038,48.434c-3.373-1.313-6.358-3.769-8.599-6.642c-2.286-2.939-3.95-6.4-4.682-9.806c-0.378-1.67-0.455-3.379-0.167-4.587  c0.123-0.599,0.322-1.049,0.544-1.28c0.188-0.225,0.344-0.34,0.71-0.45c0.188-0.209,1.92,0.011,3.684,0.687l5.67,2.044l4.438,20.53  C27.104,48.786,26.571,48.626,26.038,48.434z M50.083,16.576c-12.927,0-23.413-1.648-23.413-3.676  c0-2.038,10.485-3.681,23.413-3.681c12.938,0,23.423,1.643,23.423,3.681C73.507,14.927,63.021,16.576,50.083,16.576z M87.243,31.986  c-0.731,3.406-2.396,6.867-4.683,9.806c-2.241,2.874-5.226,5.329-8.6,6.642c-0.465,0.176-0.942,0.319-1.409,0.445l4.439-20.542  l5.481-1.983c1.764-0.676,3.494-0.896,3.684-0.687c0.366,0.11,0.521,0.225,0.71,0.45c0.223,0.231,0.422,0.681,0.544,1.28  C87.699,28.607,87.621,30.315,87.243,31.986z"/>
+            </svg>
+          </div>
+        </div>
+        <div id="start-game" class="start-game active" ontouchstart="startGame();">START</div>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+          app.initialize();
+        </script>
+
+    </body>
+</html>

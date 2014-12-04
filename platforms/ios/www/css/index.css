@@ -1,0 +1,342 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+ @font-face {
+   font-family: bit;
+   src: url(Pixel-Noir.ttf);
+ }
+
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    text-transform:uppercase;
+    width:100%;
+    position: relative;
+}
+
+body, html{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background: #CFF0EC;
+}
+
+canvas{
+  display: block;
+  margin: auto;
+  position :absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  -webkit-transform: translate3d(0,0,0);
+}
+
+.title{
+  font-size: 26px;
+  position: absolute;
+  font-family: bit;
+  text-align: center;
+  width: 100%;
+  z-index: 2;
+  padding-top: 70px;
+  color: #FF5800;
+  text-shadow: 2px 0px 0px #a23000;
+  opacity: 1;
+  -webkit-transform: translate3d(0,0,0) scale(0.01);
+  -webkit-transition: -webkit-transform .3s;
+  -webkit-transition-timing-function: ease;
+  pointer-events: none;
+}
+
+.title.active{
+
+  -webkit-transform: translate3d(0,0,0) scale(1);
+  -webkit-transition-timing-function: cubic-bezier(.05,.58,.32,1.35);
+}
+
+.jump{
+    position: absolute;
+    top: 0;left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.start-game{
+  width: 240px;
+  background: #FF5800;
+  text-align: center;
+  color: #a23000;
+  text-shadow: 0 -1px 1px #a23000;
+  font-size: 22px;
+  border-radius: 4px;
+  position: absolute;
+  padding-top: 22px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  font-family: bit;
+  box-shadow: 0 0 4px rgba(0,0,0,.04),0 4px 8px rgba(0,0,0,.07);
+  -webkit-transition: -webkit-transform .3s;
+  -webkit-transform: translate3d(0,0,0) scale(0.01);
+  -webkit-transition-timing-function: ease;
+  pointer-events: none;
+}
+
+.start-game.active{
+  -webkit-transform: translate3d(0,0,0) scale(1);
+  -webkit-transition-timing-function: cubic-bezier(.05,.58,.32,1.35);
+  pointer-events: all;
+}
+
+.medal{
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 160px;
+  margin: auto;
+  top: 220px;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  pointer-events: none;
+  -webkit-transform: translate3d(0,0,0) scale(0.01);
+  transform: translate3d(0,0,0) scale(0.01);
+  opacity: 0;
+  transition: transform .3s, opacity .3s;
+  -webkit-transition: -webkit-transform .3s, opacity .3s;
+}
+
+.medal.active{
+  opacity: 1;
+  -webkit-transform: translate3d(0,0,0) scale(1);
+  transform: translate3d(0,0,0) scale(1);
+  pointer-events: all;
+}
+
+
+
+.medal > svg{
+  opacity: 0.1;
+  position: absolute;
+  z-index: 3;
+  width: 90px;
+  height: 90px;
+  margin: auto;
+  -webkit-transform: translate3d(0,-4px,0) rotate(16deg);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.medal .medal-bg{
+  z-index: 2;
+  width: 160px;
+  height: 160px;
+  border-radius: 160px;
+  box-shadow: 0 0 4px rgba(0,0,0,.04),0 4px 8px rgba(0,0,0,.07);
+  background: #9bfff2;
+  transition: background .3s .3s;
+  -webkit-transition: background .3s .3s;
+}
+
+.medal.active .medal-bg{
+  transition: background 0s;
+  -webkit-transition: background 0s;
+}
+
+.medal.bronze .medal-bg{
+  background: #965A38;
+}
+
+.medal.copper .medal-bg{
+  background: #C98910;
+}
+
+.medal.silver .medal-bg{
+  background: silver;
+}
+
+.medal.gold .medal-bg{
+  background: gold;
+}
+
+.medal.platinum .medal-bg{
+  background: #f0f0f0;
+}
+
+.medal .ribbon{
+  width: 140px;
+  position: absolute;
+  height: 40px;
+  color: white;
+  font-family: bit;
+  font-size: 20px;
+  text-align: center;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding-top: 14px;
+  z-index: -1;
+  transform-origin: top;
+  -webkit-transform-origin: top;
+  -webkit-transform: translate3d(0,0,0) scaleY(0.01);
+  transform: translate3d(0,0,0) scaleY(0.01);
+  opacity: 0;
+  transition: transform .3s .3s, opacity .3s .3s;
+  -webkit-transition: -webkit-transform .3s .2s, opacity .3s .2s;
+}
+
+.medal.active .ribbon{
+  -webkit-transform: translate3d(0,0,0) scaleY(1);
+  transform: translate3d(0,0,0) scaleY(1);
+  opacity: 1;
+}
+
+.ribbon i:nth-of-type(1){
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 140px solid #FF5800;
+  border-bottom: 110px solid transparent;
+}
+
+.ribbon i:nth-of-type(2){
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-right: 140px solid #FF5800;
+  border-bottom: 110px solid transparent;
+}
+
+.ribbon i:nth-of-type(3){
+  width: 140px;
+  height: 100px;
+  background: #FF5800;
+  top: -20px;
+  display: block;
+  position: absolute;
+}
+
+.ribbon i:nth-of-type(4){
+  width: 0;
+  height: 0;
+  border-top: 40px solid #FF5800;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  position: absolute;
+  bottom: -70px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: block;
+}
+
+.ribbon span{
+  position: absolute;
+  width: 100%;
+  top: 24px;
+  z-index: 3;
+  text-align: center;
+  left: 0;
+  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+  padding-top: 20px;
+}
+
+.leaders{
+  width: 40px;
+  height: 40px;
+  background: #f0f0f0;
+  box-shadow: 0 0 4px rgba(0,0,0,.04),0 4px 8px rgba(0,0,0,.07);
+  position: absolute;
+  display: block;
+  top: 0px;
+  right: 0px;
+  z-index: 6;
+  padding: 0;
+  text-align: center;
+  border-radius: 40px;
+}
+
+.leaders svg{
+  width: 24px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  fill: gold;
+}
+
+
+span.st_facebook_large{
+  position: absolute;
+  display: block;
+  top: 40px;
+  right: -50px;
+  width: 40px;
+  height: 32px;
+  margin: auto;
+  z-index: 6;
+  padding: 0;
+  text-align: center;
+}
+
+
+
+span.st_twitter_large{
+  position: absolute;
+  display: block;
+  top: 90px;
+  right: -50px;
+  width: 40px;
+  height: 32px;
+  margin: auto;
+  z-index: 6;
+  padding: 0;
+  text-align: center;
+}
+
+.stLarge{
+  box-shadow: 0 0 4px rgba(0,0,0,.04),0 4px 8px rgba(0,0,0,.07);
+  border-radius: 4px;
+}
